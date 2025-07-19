@@ -1,0 +1,26 @@
+{% # import schema from '../schemas/sections/wd-header' %}
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "url": {{ request.origin | append: page.url | json }}
+  }
+</script>
+
+<div class="wd-site-header bg-site-secondary h-[52px] md:h-[80px] lg:h-[100px] "></div>
+
+{% stylesheet %}
+  
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.header",
+  "tag": "header",
+  "class": "wd-header-section",
+  "settings": [],
+  "presets": []
+}
+{% endschema %}

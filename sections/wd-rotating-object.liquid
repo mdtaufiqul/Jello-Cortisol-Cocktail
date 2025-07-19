@@ -1,0 +1,36 @@
+<section class="wd-moving-product overflow-hidden relative">
+    <div class="curve-bg">
+        <img class="w-full h-full object-cover" src="{{ section.settings.shape | image_url }}" alt="curve bg">
+    </div>
+    <div class="moving-product-wrapper py-[110px] px-[1.32rem] flex justify-center items-center">
+        <img class="w-auto h-full object-cover" src="{{ section.settings.image | image_url }}" alt="moving-product" loading="lazy">
+    </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Jello rotating bag",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Media",
+      },
+      {
+        "type": "image_picker",
+        "id": "shape",
+        "label": "Shape"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Bag"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Jello rotating bag",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}

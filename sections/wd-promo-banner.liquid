@@ -1,0 +1,110 @@
+<div class="featured-product-section bg-[#CFE9FF]">
+  <div class="px-[.84rem] pb-[120px]">
+      <div class="wd-base-container">
+          <div class="feature-product relative flex flex-wrap justify-center items-center bg-[#E3F2FF] border border-[#0060AE] rounded-[2rem] lg:rounded-[3rem]">
+            {% if section.settings.image_top != blank %}
+              <img class="feature-product-top hidden" src="{{ section.settings.image_top | image_url }}" width="auto" height="auot" alt="product-top" loading="lazy">
+            {% endif %}
+              <div class="featured-product-img rounded-[2rem] lg:rounded-[3rem] overflow-hidden">
+                  <img class="w-full h-full" src="{{ section.settings.image | image_url }}" width="auto" height="auot" alt="feature-product" loading="lazy">
+              </div>
+              <div class="feature-product-content px-[.625rem] lg:px-[2rem]">
+                  <h3 class="text-center">{{ section.settings.heading }}</h3>
+                  <div class="wd-button-wrapper py-[10px]">
+                      <div class="wd-section-btn flex justify-center items-center">
+                          <a class="inline-block" href="{{ section.settings.button_url }}">{{ section.settings.button_label }}</a>
+                      </div>
+                      <div class="button-list md:pt-[15px] pt-[7px] pb-[10px]">
+                          {{ section.settings.list_item }}
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .feature-product{
+    gap: unset;
+  }
+  .feature-product-content em {
+    font-style: normal;
+    text-decoration: underline;
+  }
+  .feature-product-content strong {
+    color: #0060AE;
+  }
+  .button-list ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+  .feature-product-content h3 p{
+      font-family: var(--primary-font)!important;
+  }
+{% endstylesheet %}
+
+{% schema %}
+  {
+    "name": "Jello promo banner",
+    "tag": "section",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "type": "header",
+        "content": "Promo image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_top",
+        "label": "Top image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "header",
+        "content": "Promo content"
+      },
+      {
+        "type": "richtext",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button text" 
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button url" 
+      },
+      {
+        "type": "richtext",
+        "id": "list_item",
+        "label": "List item"
+      },
+    ],
+    "presets": [
+      {
+        "name": "Jello promo banner",
+        "category": "Banners",
+        "settings": {
+          "heading": "<p>Wegen Hoher Nachfrage & Knappheit von <em>Ashwagandha</em>, hat <strong>Juli</strong> ein hohes Risiko, dass wir ausverkauft sind</p>",
+          "button_label": "In den Warenkorb",
+          "button_url": "/",
+          "list_item": "<ul><li>Kauf 1 Krieg 1 Gratis</li><li>Neukunden Angebot</li></ul>"
+        }
+      }
+    ]
+  }
+{% endschema %}

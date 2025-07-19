@@ -1,0 +1,87 @@
+{% # import schema from '../schemas/sections/wd-hero' %}
+
+{% style %}
+  .wd-hero__image {
+    height: 100svh;
+  }
+{% endstyle %}
+
+{% liquid
+  assign has_image_1 = false
+  assign has_image_2 = false
+  assign has_image = false
+  
+  if section.settings.image_1 != blank
+    assign has_image_1 = true
+  endif
+  if section.settings.image_2 != blank
+    assign has_image_2 = true
+  endif
+
+  if has_image_1 and has_image_2
+    assign has_image = true
+  endif
+%}
+
+{% capture media %}
+  {% if has_image %}
+    <picture>
+      {% if has_image_2 %}
+        <source media="(max-width:768px)" srcset="{{ section.settings.image_2 | image_url}}">
+      {% endif %}
+      <source media="(min-width:769px)" srcset="{{ section.settings.image_1 | image_url}}">
+      <img src="{{ section.settings.image_1 | image_url}}" width="auto" height="auto" alt="home banner" class="hero__image">
+    </picture>
+  {% endif %}
+  {% if has_image == false %}
+    <placeholder-image
+      class="hero__image wd-hero__image"
+      data-block-id="{{ section.id }}"
+      data-type="general"
+    ></placeholder-image>
+  {%- endif -%}
+{% endcapture %}
+
+<div class="wd-home-banner">
+    <div class="wd-home-banner-img w-full">
+        {{ media }}
+    </div>
+</div>
+
+{% stylesheet %}
+  
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.hero_wd",
+  "tag": "section",
+  "class": "hero-wrapper section-wrapper",
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content.media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "t:content.image_wd_1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "t:content.image_wd_2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.hero_wd",
+      "category": "t:categories.banners",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}
